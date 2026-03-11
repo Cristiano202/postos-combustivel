@@ -1,4 +1,4 @@
-package com.example.postos;
+package br.com.postos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

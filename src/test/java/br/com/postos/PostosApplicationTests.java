@@ -1,4 +1,4 @@
-package com.example.postos;
+package br.com.postos;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
