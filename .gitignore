@@ -1,0 +1,56 @@
+### Arquivos compilados ###
+target/
+*.class
+
+### Logs ###
+logs/
+*.log
+
+### Pacotes de dependência ###
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+### Arquivos de IDE ###
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse
+.settings/
+.classpath
+.project
+*.prefs
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# NetBeans
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+### Arquivos do sistema ###
+.DS_Store
+Thumbs.db
+desktop.ini
+
+### Arquivos de ambiente / segredos ###
+application-local.properties
+application-dev.properties
+*.secret
+*.key
+
+### Diretórios de build ###
+build/
+bin/
