@@ -1,6 +1,7 @@
-package br.com.postos.repository.impl;
+package br.com.postos.repository.Impl;
 
 import br.com.postos.model.Posto;
+import br.com.postos.repository.PostoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Repository
-public class PostoRepositoryImpl implements PostoRepository{
+public class PostoRepositoryImpl implements PostoRepository {
     private final List<Posto> postos = new ArrayList<>();
     private final AtomicLong contadorId = new AtomicLong(1);
 

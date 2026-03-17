@@ -1,4 +1,4 @@
-package br.com.postos.service.impl;
+package br.com.postos.service;
 
 import br.com.postos.model.CotacaoCombustivel;
 import br.com.postos.model.Posto;
