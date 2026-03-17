@@ -124,4 +124,10 @@ public class Posto {
         }
         this.precos.add(preco);
     }
+
+    public void adicionarCotacao(CotacaoCombustivel cotacao) {
+    }
+
+    public List<CotacaoCombustivel> getCotacoes() {
+    }
 }
