@@ -1,128 +1,60 @@
 package br.com.postos.model;
 
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+@Entity
+@Table(name = "tb_posto")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Posto {
 
-    private Long id;
+    @Id
+    @Column(length = 6, updatable = false, nullable = false)
+    private String id; // Mudamos para String para aceitar códigos tipo "001234"
+
+    @Column(nullable = false, unique = true, length = 18)
     private String cnpj;
+
+    @Column(name = "nome_fantasia", nullable = false)
     private String nomeFantasia;
+
     private String bandeira;
     private String endereco;
     private String bairro;
     private String cidade;
     private String estado;
     private String telefone;
-    private List<CotacaoCombustivel> cotacoes = new ArrayList<>(); // nome padronizado
 
-    // Construtor vazio
-    public Posto() {
-    }
+    // Aqui a gente diz que um Posto pode ter várias Cotações
+    // O 'mappedBy' aponta para o nome do campo 'posto' que vamos criar na Cotacao
+    @OneToMany(mappedBy = "posto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CotacaoCombustivel> cotacoes = new ArrayList<>();
 
-    // Construtor com todos os campos (exceto a lista de cotações)
-    public Posto(Long id, String cnpj, String nomeFantasia, String bandeira,
-                 String endereco, String bairro, String cidade, String estado,
-                 String telefone) {
-        this.id = id;
-        this.cnpj = cnpj;
-        this.nomeFantasia = nomeFantasia;
-        this.bandeira = bandeira;
-        this.endereco = endereco;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.telefone = telefone;
-        this.cotacoes = new ArrayList<>(); // garante que a lista não seja nula
-    }
-
-    // Getters e Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getNomeFantasia() {
-        return nomeFantasia;
-    }
-
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
-    }
-
-    public String getBandeira() {
-        return bandeira;
-    }
-
-    public void setBandeira(String bandeira) {
-        this.bandeira = bandeira;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    // Getter e Setter para a lista de cotações
-    public List<CotacaoCombustivel> getCotacoes() {
-        return cotacoes;
-    }
-
-    public void setCotacoes(List<CotacaoCombustivel> cotacoes) {
-        this.cotacoes = cotacoes;
-    }
-
-    // Método para adicionar uma cotação à lista
-    public void adicionarCotacao(CotacaoCombustivel cotacao) {
-        if (this.cotacoes == null) {
-            this.cotacoes = new ArrayList<>();
+    // A mesma mágica que fizemos na outra classe: gera o ID antes de salvar
+    @PrePersist
+    private void gerarIdAntesDeSalvar() {
+        if (this.id == null) {
+            this.id = gerarCodigoAleatorio();
         }
+    }
+
+    private String gerarCodigoAleatorio() {
+        Random sorteador = new Random();
+        int numero = sorteador.nextInt(1000000);
+        return String.format("%06d", numero);
+    }
+
+    // Um pequeno ajudante para facilitar a adição de novas cotações
+    public void adicionarCotacao(CotacaoCombustivel cotacao) {
         this.cotacoes.add(cotacao);
+        // cotacao.setPosto(this); // Isso aqui a gente vai usar quando configurar o outro lado
     }
 }
