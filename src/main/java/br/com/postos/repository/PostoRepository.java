@@ -1,24 +1,17 @@
 package br.com.postos.repository;
 
 import br.com.postos.model.Posto;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-public interface PostoRepository {
-
-    List<Posto> findAll();
-
-    Optional<Posto> findById(Long id);
+@Repository
+// O segredo é este "extends JpaRepository". Ele substitui toda a pasta Impl!
+public interface PostoRepository extends JpaRepository<Posto, String> {
 
     Optional<Posto> findByCnpj(String cnpj);
-
-    List<Posto> findByBairro(String bairro);
-
-    List<Posto> findByCidade(String cidade);
-
-    List<Posto> findByBandeira(String bandeira);
-
-    Posto save(Posto posto);
-
-    void deleteById(Long id);
+    List<Posto> findByBairroIgnoreCase(String bairro);
+    List<Posto> findByCidadeIgnoreCase(String cidade);
+    List<Posto> findByBandeiraIgnoreCase(String bandeira);
 }
