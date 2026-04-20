@@ -1,4 +1,4 @@
-package br.com.postos.repository.impl;
+package br.com.postos.repository;
 
 import br.com.postos.model.Posto;
 import java.util.List;

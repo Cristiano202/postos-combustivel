@@ -1,9 +1,10 @@
-package br.com.postos.service.impl;
+package br.com.postos.service.Impl;
 
 import br.com.postos.model.CotacaoCombustivel;
 import br.com.postos.model.Posto;
 import br.com.postos.model.enums.TipoCombustivel;
-import br.com.postos.repository.impl.PostoRepository;
+import br.com.postos.repository.PostoRepository;
+import br.com.postos.service.PostoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
-public class PostoServiceImpl implements PostoService{
+public class PostoServiceImpl implements PostoService {
     private final PostoRepository postoRepository;
     private final AtomicLong contadorCotacaoId = new AtomicLong(1);
 

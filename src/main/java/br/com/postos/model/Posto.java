@@ -14,13 +14,13 @@ public class Posto {
     private String cidade;
     private String estado;
     private String telefone;
-    private List<CotacaoCombustivel> precos = new ArrayList<>();
+    private List<CotacaoCombustivel> cotacoes = new ArrayList<>(); // nome padronizado
 
-
+    // Construtor vazio
     public Posto() {
     }
 
-
+    // Construtor com todos os campos (exceto a lista de cotações)
     public Posto(Long id, String cnpj, String nomeFantasia, String bandeira,
                  String endereco, String bairro, String cidade, String estado,
                  String telefone) {
@@ -33,7 +33,7 @@ public class Posto {
         this.cidade = cidade;
         this.estado = estado;
         this.telefone = telefone;
-        this.precos = new ArrayList<>(); // garante que a lista não seja nula
+        this.cotacoes = new ArrayList<>(); // garante que a lista não seja nula
     }
 
     // Getters e Setters
@@ -109,25 +109,20 @@ public class Posto {
         this.telefone = telefone;
     }
 
-    public List<CotacaoCombustivel> getPrecos() {
-        return precos;
-    }
-
-    public void setPrecos(List<CotacaoCombustivel> precos) {
-        this.precos = precos;
-    }
-
-    //  adicionar um preço à lista
-    public void adicionarPreco(CotacaoCombustivel preco) {
-        if (this.precos == null) {
-            this.precos = new ArrayList<>();
-        }
-        this.precos.add(preco);
-    }
-
-    public void adicionarCotacao(CotacaoCombustivel cotacao) {
-    }
-
+    // Getter e Setter para a lista de cotações
     public List<CotacaoCombustivel> getCotacoes() {
+        return cotacoes;
+    }
+
+    public void setCotacoes(List<CotacaoCombustivel> cotacoes) {
+        this.cotacoes = cotacoes;
+    }
+
+    // Método para adicionar uma cotação à lista
+    public void adicionarCotacao(CotacaoCombustivel cotacao) {
+        if (this.cotacoes == null) {
+            this.cotacoes = new ArrayList<>();
+        }
+        this.cotacoes.add(cotacao);
     }
 }
