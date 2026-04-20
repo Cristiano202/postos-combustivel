@@ -1,66 +1,48 @@
 package br.com.postos.model;
 
 import br.com.postos.model.enums.TipoCombustivel;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Random;
 
+@Entity
+@Table(name = "tb_cotacao_combustivel")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = "posto")
 public class CotacaoCombustivel {
-    private long id;
+
+    @Id
+    @Column(length = 6, updatable = false, nullable = false)
+    private String id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoCombustivel tipo;
-    private double preco;
+
+    @Column(nullable = false)
+    private Double preco;
+
+    @Column(name = "data_coleta", nullable = false)
     private LocalDate dataColeta;
 
-    public CotacaoCombustivel() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "posto_id", nullable = false)
+    private Posto posto;
 
+    @PrePersist
+    private void prepararParaSalvar() {
+        if (this.id == null) {
+            this.id = criarCodigoAleatorio();
+        }
     }
 
-    public CotacaoCombustivel(long id, TipoCombustivel tipo, double preco, LocalDate dataColeta) {
-        this.id = id;
-        this.tipo = tipo;
-        this.preco = preco;
-        this.dataColeta = dataColeta;
-
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public TipoCombustivel getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoCombustivel tipo) {
-        this.tipo = tipo;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    public LocalDate getDataColeta() {
-        return dataColeta;
-    }
-
-    public void setDataColeta(LocalDate dataColeta) {
-        this.dataColeta = dataColeta;
-    }
-
-    @Override
-    public String toString() {
-        return "CotacaoCombustivel{" +
-                "id=" + id +
-                ", tipo=" + tipo +
-                ", preco=" + preco +
-                ", dataColeta=" + dataColeta +
-                '}';
+    private String criarCodigoAleatorio() {
+        Random sorteador = new Random();
+        return String.format("%06d", sorteador.nextInt(1000000));
     }
 }

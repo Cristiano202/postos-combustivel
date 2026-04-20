@@ -46,6 +46,7 @@ Thumbs.db
 desktop.ini
 
 ### Arquivos de ambiente / segredos ###
+src/main/resources/application.properties
 application-local.properties
 application-dev.properties
 *.secret
