@@ -38,7 +38,7 @@ public class CotacaoController {
     @GetMapping("/posto/{postoId}")
     public ResponseEntity<?> listarPorPosto(@PathVariable String postoId) {
         try {
-            return ResponseEntity.ok(service.listarPorPosto(postoId));
+            return ResponseEntity.ok(service.buscarPorPosto(postoId));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
