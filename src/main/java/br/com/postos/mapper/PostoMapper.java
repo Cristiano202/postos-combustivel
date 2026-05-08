@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class PostoMapper {
 
-    // ---------- Posto ----------
+    // ---------- Mapeamento de Posto ----------
     public static Posto toEntity(PostoRequestDTO dto) {
         if (dto == null) {
             return null;
@@ -28,7 +28,6 @@ public class PostoMapper {
         posto.setCidade(dto.getCidade());
         posto.setEstado(dto.getEstado());
         posto.setTelefone(dto.getTelefone());
-        // A lista de cotações não é mapeada aqui, pois é criada separadamente
         return posto;
     }
 
@@ -47,11 +46,11 @@ public class PostoMapper {
         dto.setEstado(entity.getEstado());
         dto.setTelefone(entity.getTelefone());
 
-        // Mapeia a lista de cotações, se existir
+        // CORREÇÃO: Usando a lambda para garantir que chame o toResponseDTO de Cotação
         if (entity.getCotacoes() != null) {
             dto.setCotacoes(
                     entity.getCotacoes().stream()
-                            .map(PostoMapper::toResponseDTO)
+                            .map(cotacao -> toResponseDTO(cotacao))
                             .collect(Collectors.toList())
             );
         } else {
@@ -60,19 +59,18 @@ public class PostoMapper {
         return dto;
     }
 
-    // ---------- Cotação ----------
+    // ---------- Mapeamento de Cotação ----------
     public static CotacaoCombustivel toEntity(CotacaoRequestDTO dto) {
         if (dto == null) {
             return null;
         }
         CotacaoCombustivel cotacao = new CotacaoCombustivel();
-        // Converte a String do tipo para o Enum (case insensitive)
         if (dto.getTipo() != null) {
+            // Converte String para Enum
             cotacao.setTipo(TipoCombustivel.valueOf(dto.getTipo().toUpperCase()));
         }
         cotacao.setPreco(dto.getPreco());
         cotacao.setDataColeta(dto.getDataColeta());
-        // ID será gerado no service/repository
         return cotacao;
     }
 
@@ -81,7 +79,7 @@ public class PostoMapper {
             return null;
         }
         CotacaoResponseDTO dto = new CotacaoResponseDTO();
-        dto.setId(entity.getId());
+        dto.setId(Long.valueOf(entity.getId()));
         dto.setTipo(entity.getTipo() != null ? entity.getTipo().name() : null);
         dto.setPreco(entity.getPreco());
         dto.setDataColeta(entity.getDataColeta());

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class PostoResponseDTO {
 
-    private Long id;
+    private String id;
     private String cnpj;
     private String nomeFantasia;
     private String bandeira;
@@ -20,7 +20,7 @@ public class PostoResponseDTO {
     }
 
     // Construtor com todos os campos (útil para criar o DTO rapidamente)
-    public PostoResponseDTO(Long id, String cnpj, String nomeFantasia, String bandeira,
+    public PostoResponseDTO(String id, String cnpj, String nomeFantasia, String bandeira,
                             String endereco, String bairro, String cidade, String estado,
                             String telefone, List<CotacaoResponseDTO> cotacoes) {
         this.id = id;
@@ -36,11 +36,11 @@ public class PostoResponseDTO {
     }
 
     // Getters e Setters
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

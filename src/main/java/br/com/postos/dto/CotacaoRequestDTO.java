@@ -2,7 +2,12 @@ package br.com.postos.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
+@Getter
+@Setter
 
 public class CotacaoRequestDTO {
 
@@ -26,28 +31,4 @@ public class CotacaoRequestDTO {
         this.dataColeta = dataColeta;
     }
 
-    // Getters e Setters
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
-    public LocalDate getDataColeta() {
-        return dataColeta;
-    }
-
-    public void setDataColeta(LocalDate dataColeta) {
-        this.dataColeta = dataColeta;
-    }
 }
