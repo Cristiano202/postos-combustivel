@@ -4,8 +4,8 @@ services:
     image: postgres
     container_name: postgres-posto
     environment:
-      - POSTGRES_DB=postos_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
       - "5432:5432"
