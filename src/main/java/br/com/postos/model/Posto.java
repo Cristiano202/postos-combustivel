@@ -25,7 +25,6 @@ public class Posto {
 
     @Column(name = "nome_fantasia", nullable = false)
     private String nomeFantasia;
-
     private String bandeira;
     private String endereco;
     private String bairro;
@@ -33,12 +32,12 @@ public class Posto {
     private String estado;
     private String telefone;
 
-    // Aqui a gente diz que um Posto pode ter várias Cotações
-    // O 'mappedBy' aponta para o nome do campo 'posto' que vamos criar na Cotacao
+    // diz que um Posto pode ter várias Cotações
+    // O 'mappedBy' aponta para o nome do campo
     @OneToMany(mappedBy = "posto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CotacaoCombustivel> cotacoes = new ArrayList<>();
 
-    // A mesma mágica que fizemos na outra classe: gera o ID antes de salvar
+
     @PrePersist
     private void gerarIdAntesDeSalvar() {
         if (this.id == null) {

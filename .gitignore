@@ -1,38 +1,48 @@
-### Arquivos compilados ###
+### Arquivos de Build e Compilação ###
 target/
+bin/
+build/
+out/
+.gradle/
+.mvn/
 *.class
 
 ### Logs ###
 logs/
 *.log
 
-### Pacotes de dependência ###
+### Pacotes e Binários ###
+*.jar
 *.war
 *.ear
 *.zip
 *.tar.gz
 *.rar
 
-### Arquivos de IDE ###
 
+.env
+.env.local
+application-local.properties
+application-dev.properties
+*.secret
+*.key
+
+### Arquivos de IDE ###
 # IntelliJ IDEA
 .idea/
 *.iws
 *.iml
 *.ipr
-out/
-
-# Eclipse
-.settings/
-.classpath
-.project
-*.prefs
 
 # VS Code
 .vscode/
 *.code-workspace
 
-# NetBeans
+# Eclipse / NetBeans
+.settings/
+.classpath
+.project
+*.prefs
 nbproject/private/
 nbbuild/
 dist/
@@ -40,18 +50,7 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
-### Arquivos do sistema ###
+### Arquivos do Sistema ###
 .DS_Store
 Thumbs.db
 desktop.ini
-
-### Arquivos de ambiente / segredos ###
-src/main/resources/application.properties
-application-local.properties
-application-dev.properties
-*.secret
-*.key
-
-### Diretórios de build ###
-build/
-bin/
