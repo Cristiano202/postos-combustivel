@@ -14,7 +14,7 @@
     <artifactId>postos</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>postos</name>
-    <description>Sistema de Postos de Combustíveis</description>
+    <description>Sistema de Postos de Combustiveis</description>
 
     <properties>
         <java.version>21</java.version>
@@ -72,6 +72,17 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <propertiesEncoding>UTF-8</propertiesEncoding>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 </project>
