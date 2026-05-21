@@ -38,3 +38,13 @@ Este sistema foi construído especificamente para explorar a integração entre 
    ```bash
    git clone [https://github.com/SeuUsuario/postos-combustivel.git](https://github.com/SeuUsuario/postos-combustivel.git)
    cd postos-combustivel
+
+   Suba o banco de dados via Docker:
+
+2.Bash
+docker-compose up -d
+Execute a aplicação:
+
+3.Bash
+./mvnw spring-boot:run
+A API estará disponível em http://localhost:8080.
