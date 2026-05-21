@@ -10,7 +10,6 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    # CONFIGURAÇÃO DO BANCO POSTGRESQL NO DOCKER
     services:
       postgres:
         image: postgres:15
@@ -20,7 +19,6 @@ jobs:
           POSTGRES_PASSWORD: senha_segura_ci
         ports:
           - 5432:5432
-        # Garante que o Postgres tente  conectar
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -38,10 +36,18 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      #  TESTES CONECTANDO NO BANCO DO CI
       - name: Compilar e Rodar Testes
         run: mvn clean test
         env:
           SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/postos_db
           SPRING_DATASOURCE_USERNAME: cristiano
           SPRING_DATASOURCE_PASSWORD: senha_segura_ci
+
+      # AUTOMÁTICO
+      - name: Disparar Deploy no Render
+        # TRAVA DE SEGURANÇA
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          curl -X POST https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          -H "Accept: application/json"
