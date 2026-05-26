@@ -1,0 +1,26 @@
+name: Java CI/CD com Maven
+
+# 1. GATILHO
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o código fonte
+        uses: actions/checkout@v4
+
+      - name: Configurar o JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Compilar e Rodar Testes
+        run: mvn clean test
