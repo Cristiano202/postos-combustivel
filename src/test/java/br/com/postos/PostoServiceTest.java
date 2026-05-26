@@ -29,7 +29,7 @@ public class PostoServiceTest {
 
     @Test
     @DisplayName("Deve salvar um posto com sucesso e gerar ID de 6 dígitos")
-    void deveSalvarPostoComSucesso() {
+   public void deveSalvarPostoComSucesso() {
 
         Posto posto = new Posto();
         posto.setNomeFantasia("Posto Teste");
@@ -38,14 +38,22 @@ public class PostoServiceTest {
 
         when(postoRepository.save(any(Posto.class))).thenReturn(posto);
 
-
         Posto postoSalvo = postoService.salvar(posto);
-
-        // 3. THEN (Então verificamos se deu certo)
         assertNotNull(postoSalvo);
         assertEquals("Posto Teste", postoSalvo.getNomeFantasia());
 
         // Verifica se o repositório foi chamado exatamente 1 vez
         verify(postoRepository, times(1)).save(any(Posto.class));
+    }
+    @Test
+    public void listarTeste(){
+        Posto posto =new Posto();
+        posto.setNomeFantasia("Posto caja ");
+        posto.setCnpj("12343782299292");
+        when(postoRepository.save(any(Posto.class))).thenReturn(posto);//simula o banco de dados
+        Posto postoSalvo=postoService.salvar(posto);
+        assertEquals("Posto caja", postoSalvo.getNomeFantasia().trim());
+        verify(postoRepository, times(1)).save(any(Posto.class));
+
     }
 }
