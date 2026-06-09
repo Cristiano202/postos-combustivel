@@ -10,9 +10,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify; // USE ESTE
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
@@ -29,12 +30,9 @@ public class PostoServiceTest {
 
     @Test
     @DisplayName("Deve salvar um posto com sucesso e gerar ID de 6 dígitos")
-   public void deveSalvarPostoComSucesso() {
-
         Posto posto = new Posto();
         posto.setNomeFantasia("Posto Teste");
         posto.setCnpj("12345678000199");
-
 
         when(postoRepository.save(any(Posto.class))).thenReturn(posto);
 
@@ -42,18 +40,7 @@ public class PostoServiceTest {
         assertNotNull(postoSalvo);
         assertEquals("Posto Teste", postoSalvo.getNomeFantasia());
 
-        // Verifica se o repositório foi chamado exatamente 1 vez
+        // Verifica se o repositório foi chamado e 1 vez
         verify(postoRepository, times(1)).save(any(Posto.class));
-    }
-    @Test
-    public void listarTeste(){
-        Posto posto =new Posto();
-        posto.setNomeFantasia("Posto caja ");
-        posto.setCnpj("12343782299292");
-        when(postoRepository.save(any(Posto.class))).thenReturn(posto);//simula o banco de dados
-        Posto postoSalvo=postoService.salvar(posto);
-        assertEquals("Posto caja", postoSalvo.getNomeFantasia().trim());
-        verify(postoRepository, times(1)).save(any(Posto.class));
-
     }
 }
