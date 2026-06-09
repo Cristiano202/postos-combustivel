@@ -30,6 +30,7 @@ public class PostoServiceTest {
 
     @Test
     @DisplayName("Deve salvar um posto com sucesso e gerar ID de 6 dígitos")
+    public void deveSalvarPostoComSucesso() {
         Posto posto = new Posto();
         posto.setNomeFantasia("Posto Teste");
         posto.setCnpj("12345678000199");
