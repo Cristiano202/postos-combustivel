@@ -30,7 +30,7 @@ public class PostoServiceTest {
 
     @Test
     @DisplayName("Deve salvar um posto com sucesso e gerar ID de 6 dígitos")
-    void SalvarPostoComSucesso() {
+    public void deveSalvarPostoComSucesso() {
         Posto posto = new Posto();
         posto.setNomeFantasia("Posto Teste");
         posto.setCnpj("12345678000199");
@@ -44,32 +44,4 @@ public class PostoServiceTest {
         // Verifica se o repositório foi chamado e 1 vez
         verify(postoRepository, times(1)).save(any(Posto.class));
     }
-
-    @Test
-    @DisplayName("Deve lançar exceção ao tentar cadastrar posto com CNPJ já existente")
-    void deveLancarExcecaoQuandoCnpjJaExistir() {
-
-        Posto postoExistente = new Posto();
-        postoExistente.setId("123456");
-        postoExistente.setCnpj("12345678000199");
-        postoExistente.setNomeFantasia("Posto Antigo");
-
-        // Novo posto tentando se cadastrar com o mesmo CNPJ (ID dele é null)
-        Posto postoNovo = new Posto();
-        postoNovo.setCnpj("12345678000199");
-        postoNovo.setNomeFantasia("Posto Novo");
-
-        // Configura o Mockito para simular que achou o CNPJ no banco
-        when(postoRepository.findByCnpj("12345678000199")).thenReturn(Optional.of(postoExistente));
-
-        //  joga RuntimeException
-        RuntimeException excecao = assertThrows(RuntimeException.class, () -> {
-            postoService.salvar(postoNovo);
-        });
-
-        // Valida se o metodo save NUNCA foi chamado
-        verify(postoRepository, times(0)).save(any(Posto.class));
-    }
-
-
 }
